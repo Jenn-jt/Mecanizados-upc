@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mecanizados UPC — Precisión Industrial · Rubí, Barcelona</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Roboto:wght@300;400;500&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0269D8;
+      --blue-dark:  #0155B0;
+      --blue-deep:  #1B61FF;
+      --blue-light: #4E9AF5;
+      --blue-btn:   #298BD1;
+      --blue-pale:  #EBF3FD;
+      --blue-wash:  #F4F8FE;
+      --text:       #040404;
+      --text-body:  #444242;
+      --text-muted: #7A8BA8;
+      --border:     #DDE6F5;
+      --bg:         #FFFFFF;
+      --bg-soft:    #F7FAFF;
+      --bg-gray:    #F2F5FA;
+      --white:      #FFFFFF;
+
+      --font-display: 'Roboto Condensed', sans-serif;
+      --font-serif:   'DM Serif Display', serif;
+      --font-body:    'Roboto', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text-body); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-gray); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4rem; height: 72px;
+      box-shadow: 0 1px 24px rgba(2,105,216,0.06);
+      transition: height 0.3s;
+    }
+    nav.scrolled { height: 60px; }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.5rem; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.1em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-display); font-weight: 400; font-size: 0.85rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--text-body); text-decoration: none; transition: color 0.2s;
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
+      background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.25s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      font-family: var(--font-display); font-weight: 500; font-size: 0.8rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--blue); color: white; padding: 0.65rem 1.6rem;
+      text-decoration: none; transition: background 0.2s, transform 0.2s;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Left panel — content */
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 5rem 5rem 4rem;
+      position: relative; z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-display); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue);
+      background: var(--blue-pale); padding: 0.4rem 0.9rem;
+      margin-bottom: 2rem; width: fit-content;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s;
+    }
+    .hero-tag::before { content: '●'; font-size: 0.5rem; }
+
+    .hero-title {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(3.2rem, 6vw, 5.5rem); line-height: 0.95;
+      letter-spacing: -0.01em; text-transform: uppercase; color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .hero-title .line-1 { display: block; opacity: 0; animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards 0.4s; }
+    .hero-title .line-2 {
+      display: block; color: var(--blue);
+      opacity: 0; animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards 0.55s;
+    }
+    .hero-title .line-3 {
+      display: block; font-style: italic; font-family: var(--font-serif);
+      font-weight: 400; text-transform: none; color: var(--text-body); font-size: 0.7em;
+      opacity: 0; animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards 0.7s;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-desc {
+      font-size: 1rem; line-height: 1.8; color: var(--text-muted);
+      max-width: 420px; margin: 2rem 0 3rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 0.85s;
+    }
+    .hero-desc strong { color: var(--text-body); font-weight: 500; }
+
+    .hero-btns {
+      display: flex; gap: 1rem; align-items: center;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 1s;
+    }
+    .btn-blue {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--blue); color: white;
+      font-family: var(--font-display); font-weight: 500; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.95rem 2rem; text-decoration: none;
+      position: relative; overflow: hidden; transition: background 0.25s, transform 0.2s;
+    }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-blue svg { transition: transform 0.2s; }
+    .btn-blue:hover svg { transform: translateX(3px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 1.5px solid var(--border); color: var(--text-body);
+      font-family: var(--font-display); font-weight: 400; font-size: 0.82rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.95rem 1.8rem; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+
+    /* Hero certifications */
+    .hero-certs {
+      display: flex; gap: 1.5rem; margin-top: 3.5rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 1.15s;
+    }
+    .cert-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-display); font-size: 0.7rem;
+      font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .cert-item svg { width: 16px; height: 16px; stroke: var(--blue); fill: none; stroke-width: 2; }
+    .cert-divider { width: 1px; height: 20px; background: var(--border); }
+
+    /* Right panel — visual */
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--blue-deep);
+    }
+    /* Animated blueprint grid */
+    .hero-right-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+      animation: gridMove 25s linear infinite;
+    }
+    @keyframes gridMove {
+      from { background-position: 0 0, 0 0, 0 0, 0 0; }
+      to   { background-position: 80px 80px, 80px 80px, 16px 16px, 16px 16px; }
+    }
+    /* Geometric shapes */
+    .hero-geo {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .geo-circle {
+      width: 340px; height: 340px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      position: absolute; animation: rotateSlow 40s linear infinite;
+    }
+    .geo-circle::before {
+      content: ''; position: absolute; inset: 20px; border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.08);
+    }
+    .geo-circle-2 {
+      width: 220px; height: 220px;
+      border: 1px solid rgba(78,154,245,0.3);
+      animation: rotateSlow 25s linear infinite reverse;
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .geo-cross {
+      position: absolute; width: 60px; height: 60px;
+    }
+    .geo-cross::before, .geo-cross::after {
+      content: ''; position: absolute; background: rgba(255,255,255,0.15);
+    }
+    .geo-cross::before { width: 1px; height: 100%; left: 50%; }
+    .geo-cross::after  { width: 100%; height: 1px; top: 50%; }
+    /* Floating tech text */
+    .hero-tech-text {
+      position: absolute; bottom: 3rem; left: 3rem; right: 3rem;
+      font-family: var(--font-display); font-size: 0.65rem; font-weight: 300;
+      letter-spacing: 0.15em; line-height: 2; color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+    }
+    .hero-tech-text span { color: rgba(78,154,245,0.8); }
+    /* Main text on right */
+    .hero-right-content {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      text-align: center; z-index: 2;
+    }
+    .hero-big-num {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 8rem; line-height: 1; color: rgba(255,255,255,0.06);
+      letter-spacing: -0.02em; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%,-55%);
+      white-space: nowrap;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      padding: 2rem 2.5rem; text-align: left;
+      position: relative; z-index: 2;
+    }
+    .hero-badge-label {
+      font-family: var(--font-display); font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blue-light); margin-bottom: 0.8rem;
+    }
+    .hero-badge-value {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 2.5rem; color: white; line-height: 1;
+    }
+    .hero-badge-sub {
+      font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem;
+      font-family: var(--font-display);
+    }
+    /* Stats pills */
+    .hero-stats-right {
+      position: absolute; right: 2rem; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 1rem;
+      opacity: 0; animation: fadeUp 0.6s ease forwards 1.3s;
+    }
+    .stat-pill {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem 1.5rem; text-align: center; min-width: 110px;
+      backdrop-filter: blur(4px);
+    }
+    .stat-pill-num {
+      font-family: var(--font-display); font-weight: 700; font-size: 2rem;
+      color: white; line-height: 1;
+    }
+    .stat-pill-num sup { font-size: 0.8rem; color: var(--blue-light); }
+    .stat-pill-label {
+      font-family: var(--font-display); font-size: 0.58rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-top: 0.3rem;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-bar {
+      background: var(--blue); overflow: hidden; padding: 0.85rem 0;
+    }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: marqueeRun 30s linear infinite;
+    }
+    @keyframes marqueeRun {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 1.5rem; padding: 0 2rem;
+      font-family: var(--font-display); font-weight: 400; font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75);
+    }
+    .marquee-item.hi { color: white; font-weight: 500; }
+    .marquee-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.4); border-radius: 50%; }
+
+    /* ── SECTION SYSTEM ── */
+    section { padding: 7rem 4rem; }
+    .section-tag {
+      font-family: var(--font-display); font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue);
+      display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;
+    }
+    .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--blue); }
+    .section-title {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.0;
+      letter-spacing: -0.01em; text-transform: uppercase; color: var(--text);
+    }
+    .section-title em {
+      font-family: var(--font-serif); font-style: italic;
+      font-weight: 400; text-transform: none; color: var(--blue); font-size: 0.9em;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--bg-soft); }
+    .services-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 4rem; gap: 3rem;
+    }
+    .services-intro {
+      max-width: 360px; font-size: 0.95rem; line-height: 1.85; color: var(--text-muted);
+    }
+
+    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
+    .service-card {
+      background: var(--bg); padding: 2.8rem 2rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      position: relative; overflow: hidden; transition: background 0.25s;
+    }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--blue); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .service-card:hover { background: var(--blue-pale); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .svc-num { font-family: var(--font-display); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--text-muted); }
+    .svc-icon {
+      width: 50px; height: 50px; background: var(--blue-pale);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s;
+    }
+    .service-card:hover .svc-icon { background: var(--blue); }
+    .svc-icon svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 1.5; transition: stroke 0.25s; }
+    .service-card:hover .svc-icon svg { stroke: white; }
+    .svc-name { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--text); }
+    .svc-desc { font-size: 0.83rem; line-height: 1.8; color: var(--text-muted); flex: 1; }
+    .svc-link {
+      font-family: var(--font-display); font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue);
+      text-decoration: none; display: flex; align-items: center; gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .service-card:hover .svc-link { gap: 0.7rem; }
+
+    /* ── WHY US ── */
+    .whyus { background: var(--bg); }
+    .whyus-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 4rem;
+    }
+    .whyus-visual {
+      position: relative; background: var(--blue-deep); aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .whyus-visual-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .whyus-visual-content { position: relative; z-index: 2; padding: 3rem; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+    .whyus-visual-quote {
+      font-family: var(--font-display); font-weight: 300; font-size: 1.1rem;
+      line-height: 1.7; color: rgba(255,255,255,0.7); max-width: 340px;
+    }
+    .whyus-visual-quote strong { color: white; font-weight: 500; }
+    .whyus-visual-source {
+      margin-top: 1.5rem; font-family: var(--font-display); font-size: 0.65rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: rgba(78,154,245,0.8);
+    }
+    /* Data dots on visual */
+    .whyus-data {
+      position: absolute; top: 2rem; right: 2rem;
+      display: flex; flex-direction: column; gap: 0.8rem; z-index: 2;
+    }
+    .data-chip {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.6rem 1rem; backdrop-filter: blur(4px);
+    }
+    .data-chip-val { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: white; }
+    .data-chip-lbl { font-family: var(--font-display); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+
+    .whyus-items { display: flex; flex-direction: column; gap: 2rem; }
+    .whyus-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    }
+    .whyus-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .whyus-item-icon {
+      width: 44px; height: 44px; background: var(--blue-pale);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .whyus-item-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .whyus-item-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-transform: uppercase; color: var(--text); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+    .whyus-item-desc { font-size: 0.85rem; line-height: 1.8; color: var(--text-muted); }
+
+    /* ── SECTORS ── */
+    .sectors { background: var(--bg-soft); }
+    .sectors-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 4rem; }
+    .sector-card {
+      background: var(--bg); padding: 2.5rem 2rem;
+      position: relative; overflow: hidden; transition: background 0.25s;
+      display: flex; flex-direction: column; gap: 1rem; min-height: 180px;
+    }
+    .sector-card:hover { background: var(--blue-pale); }
+    .sector-number {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: var(--font-display); font-weight: 700; font-size: 3rem;
+      color: var(--blue-pale); line-height: 1; transition: color 0.25s;
+    }
+    .sector-card:hover .sector-number { color: rgba(2,105,216,0.12); }
+    .sector-icon { display: flex; }
+    .sector-icon svg { width: 26px; height: 26px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .sector-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); }
+    .sector-sub { font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-display); letter-spacing: 0.05em; text-transform: uppercase; margin-top: auto; }
+
+    /* ── PROCESS ── */
+    .process { background: var(--text); }
+    .process .section-tag { color: var(--blue-light); }
+    .process .section-tag::before { background: var(--blue-light); }
+    .process .section-title { color: white; }
+    .process .section-title em { color: var(--blue-light); }
+    .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 4rem; }
+    .process-step {
+      padding: 3rem 2rem; border-right: 1px solid rgba(255,255,255,0.08);
+      position: relative; transition: background 0.25s;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step:hover { background: rgba(2,105,216,0.12); }
+    .step-num-wrap {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+    }
+    .step-num {
+      width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 0.75rem; font-weight: 500;
+      color: rgba(255,255,255,0.5);
+    }
+    .step-line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+    .process-step:last-child .step-line { display: none; }
+    .step-title { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: white; letter-spacing: 0.03em; margin-bottom: 1rem; }
+    .step-desc { font-size: 0.82rem; line-height: 1.85; color: rgba(255,255,255,0.45); }
+    .step-arrow { margin-top: 2rem; }
+    .step-arrow svg { width: 20px; height: 20px; stroke: var(--blue-light); fill: none; stroke-width: 1.5; opacity: 0.5; }
+
+    /* ── STATS ── */
+    .stats-row {
+      background: var(--blue); padding: 4rem;
+      display: grid; grid-template-columns: repeat(4,1fr);
+      position: relative; overflow: hidden;
+    }
+    .stats-row::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .stat-box { padding: 1rem 2rem; border-right: 1px solid rgba(255,255,255,0.15); position: relative; z-index: 1; }
+    .stat-box:last-child { border-right: none; }
+    .stat-n { font-family: var(--font-display); font-weight: 700; font-size: 3.5rem; color: white; line-height: 1; }
+    .stat-n sup { font-size: 1.2rem; color: rgba(255,255,255,0.7); }
+    .stat-l { font-family: var(--font-display); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 0.4rem; }
+
+    /* ── TRUST ── */
+    .trust { background: var(--bg-gray); padding: 4rem; }
+    .trust-inner { display: flex; align-items: center; gap: 3rem; }
+    .trust-label {
+      font-family: var(--font-display); font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .trust-line { width: 1px; height: 32px; background: var(--border); }
+    .trust-items { display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+    .trust-item {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .trust-item:hover { color: var(--blue); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--blue-deep); padding: 8rem 4rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .cta-section .section-tag { justify-content: center; color: var(--blue-light); }
+    .cta-section .section-tag::before { background: var(--blue-light); }
+    .cta-title {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(3rem, 7vw, 6rem); text-transform: uppercase;
+      color: white; line-height: 0.95; margin: 1.5rem 0; position: relative;
+    }
+    .cta-title .italic-line { font-family: var(--font-serif); font-weight: 400; font-style: italic; text-transform: none; color: rgba(255,255,255,0.7); font-size: 0.7em; }
+    .cta-sub { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 3rem; position: relative; }
+    .cta-btns { display: flex; justify-content: center; align-items: center; gap: 1.5rem; position: relative; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: white; color: var(--blue-deep);
+      font-family: var(--font-display); font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 1.1rem 2.4rem; text-decoration: none; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); }
+    .cta-phone {
+      font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s;
+    }
+    .cta-phone:hover { color: white; }
+
+    /* Contact chips */
+    .cta-contacts { display: flex; justify-content: center; gap: 2rem; margin-top: 4rem; flex-wrap: wrap; position: relative; }
+    .contact-chip {
+      display: flex; align-items: center; gap: 0.8rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.8rem 1.4rem; color: rgba(255,255,255,0.7);
+      font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.04em;
+      text-decoration: none; transition: background 0.2s, color 0.2s;
+    }
+    .contact-chip:hover { background: rgba(255,255,255,0.15); color: white; }
+    .contact-chip svg { width: 14px; height: 14px; stroke: var(--blue-light); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer { background: #04070D; padding: 5rem 4rem 2.5rem; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .foot-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; letter-spacing: 0.06em; text-transform: uppercase; color: white; margin-bottom: 1rem; }
+    .foot-logo span { color: var(--blue-light); }
+    .foot-desc { font-size: 0.82rem; line-height: 1.9; color: rgba(255,255,255,0.35); max-width: 260px; margin-bottom: 2rem; }
+    .foot-contact { font-size: 0.8rem; color: rgba(255,255,255,0.5); display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.7rem; }
+    .foot-contact svg { width: 13px; height: 13px; stroke: var(--blue-light); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 2px; }
+    .foot-col-title { font-family: var(--font-display); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.5rem; padding-bottom: 0.7rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .foot-links { list-style: none; }
+    .foot-links li { margin-bottom: 0.7rem; }
+    .foot-links a { font-size: 0.82rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; font-family: var(--font-display); }
+    .foot-links a:hover { color: var(--blue-light); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .foot-copy { font-family: var(--font-display); font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); }
+    .foot-badges { display: flex; gap: 1rem; }
+    .foot-badge { font-family: var(--font-display); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.1); padding: 0.3rem 0.7rem; color: rgba(255,255,255,0.25); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 50vh; }
+      .services-grid { grid-template-columns: repeat(2,1fr); }
+      .sectors-grid { grid-template-columns: repeat(2,1fr); }
+      .whyus-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .process-steps { grid-template-columns: repeat(2,1fr); }
+      .stats-row { grid-template-columns: repeat(2,1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero-left { padding: 8rem 1.5rem 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .sectors-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .services-head { flex-direction: column; }
+      .trust-inner { flex-direction: column; align-items: flex-start; }
+      .cta-contacts { gap: 1rem; }
+      .hero-stats-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Mecanizados<span>UPC</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sectores">Sectores</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#empresa">Empresa</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <a href="tel:+34938636976" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 2 2 0 012 .98h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+      +34 938 636 976
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="inicio">
+    <!-- LEFT: content -->
+    <div class="hero-left">
+      <div class="hero-tag">Rubí, Barcelona · Más de 15 años</div>
+      <h1 class="hero-title">
+        <span class="line-1">Diseño &amp;</span>
+        <span class="line-2">Mecanizado</span>
+        <span class="line-3">de alta precisión industrial</span>
+      </h1>
+      <p class="hero-desc">
+        Fabricamos soluciones a medida para los sectores más exigentes.
+        <strong>CNC, maquinaria especial e ingeniería</strong> bajo un mismo techo
+        en Rubí, Barcelona.
+      </p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-blue">
+          Solicitar presupuesto
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#servicios" class="btn-outline">Ver servicios</a>
+      </div>
+      <div class="hero-certs">
+        <div class="cert-item">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          ISO 9001
+        </div>
+        <div class="cert-divider"></div>
+        <div class="cert-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Respuesta 24–48h
+        </div>
+        <div class="cert-divider"></div>
+        <div class="cert-item">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          CNC 5 ejes
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: visual -->
+    <div class="hero-right">
+      <div class="hero-right-grid"></div>
+      <div class="hero-geo">
+        <div class="geo-circle"></div>
+        <div class="geo-circle geo-circle-2"></div>
+        <div class="geo-cross"></div>
+      </div>
+      <div class="hero-big-num">±0.01</div>
+
+      <!-- Floating stats -->
+      <div class="hero-stats-right">
+        <div class="stat-pill">
+          <div class="stat-pill-num"><span class="count" data-target="15">0</span><sup>+</sup></div>
+          <div class="stat-pill-label">Años</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-num"><span class="count" data-target="500">0</span><sup>+</sup></div>
+          <div class="stat-pill-label">Proyectos</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-num"><span class="count" data-target="6">0</span></div>
+          <div class="stat-pill-label">Sectores</div>
+        </div>
+      </div>
+
+      <div class="hero-tech-text">
+        <span>TOLERANCIA:</span> ±0.01mm &nbsp;|&nbsp;
+        <span>MATERIAL:</span> ACERO · ALUMINIO · TITANIO &nbsp;|&nbsp;
+        <span>PROC:</span> TORNO · FRESADO · RECTIFICADO &nbsp;|&nbsp;
+        <span>CERT:</span> ISO 9001:2015
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span class="marquee-item hi"><span class="marquee-dot"></span>Mecanizado CNC</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Tolerancias ±0.01mm</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>Maquinaria Especial</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Ingeniería de Producto</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>ISO 9001:2015</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Estructuras Metálicas</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Automoción · Aeronáutica · Ferroviario</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>Rubí, Barcelona</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Tornería · Fresado · Rectificado</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>Mecanizado CNC</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Tolerancias ±0.01mm</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>Maquinaria Especial</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Ingeniería de Producto</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>ISO 9001:2015</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Estructuras Metálicas</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Automoción · Aeronáutica · Ferroviario</span>
+      <span class="marquee-item hi"><span class="marquee-dot"></span>Rubí, Barcelona</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Tornería · Fresado · Rectificado</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="servicios">
+    <div class="services-head">
+      <div>
+        <div class="section-tag reveal">Nuestros servicios</div>
+        <h2 class="section-title reveal d1">SOLUCIONES<br><em>integrales</em><br>DE FABRICACIÓN</h2>
+      </div>
+      <p class="services-intro reveal d2">
+        Controlamos cada fase del proceso productivo, desde el diseño hasta
+        la pieza terminada, para garantizar calidad y precisión en cada proyecto.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="svc-num">01 · 04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="svc-name">Mecanizado CNC</div>
+        <p class="svc-desc">Tornería, fresado, taladrado y rectificado con maquinaria de última generación. Tolerancias de ±0.01mm para las aplicaciones más exigentes.</p>
+        <a href="#" class="svc-link">Saber más <svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal d1">
+        <div class="svc-num">02 · 04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+        <div class="svc-name">Maquinaria Especial</div>
+        <p class="svc-desc">Diseño y construcción de maquinaria a medida. Utillajes de precisión y conjuntos mecánicos complejos para procesos industriales únicos.</p>
+        <a href="#" class="svc-link">Saber más <svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="svc-num">03 · 04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16"/></svg></div>
+        <div class="svc-name">Ingeniería</div>
+        <p class="svc-desc">Diseño y desarrollo de producto desde el concepto hasta la producción. Ingeniería inversa, optimización de diseños y validación técnica completa.</p>
+        <a href="#" class="svc-link">Saber más <svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="service-card reveal d3">
+        <div class="svc-num">04 · 04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 18h7M17.5 14.5v7"/></svg></div>
+        <div class="svc-name">Estructuras Metálicas</div>
+        <p class="svc-desc">Fabricación de estructuras y componentes metálicos de alta complejidad. Soldadura TIG/MIG certificada y acabados superficiales de precisión.</p>
+        <a href="#" class="svc-link">Saber más <svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="whyus" id="empresa">
+    <div class="section-tag reveal">Por qué elegirnos</div>
+    <h2 class="section-title reveal d1">MÁS DE 15 AÑOS<br><em>fabricando excelencia</em></h2>
+    <div class="whyus-grid">
+      <div class="whyus-visual reveal">
+        <div class="whyus-visual-grid"></div>
+        <div class="whyus-data">
+          <div class="data-chip">
+            <div class="data-chip-val">±0.01</div>
+            <div class="data-chip-lbl">mm tolerancia</div>
+          </div>
+          <div class="data-chip">
+            <div class="data-chip-val">5-eje</div>
+            <div class="data-chip-lbl">CNC avanzado</div>
+          </div>
+        </div>
+        <div class="whyus-visual-content">
+          <blockquote class="whyus-visual-quote">
+            Cada proyecto es una oportunidad de demostrar que la <strong>precisión no es un lujo</strong>, es nuestra manera de trabajar.
+          </blockquote>
+          <div class="whyus-visual-source">Mecanizados UPC S.L. · Rubí, Barcelona</div>
+        </div>
+      </div>
+      <div class="whyus-items reveal d2">
+        <div class="whyus-item">
+          <div class="whyus-item-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="whyus-item-title">Calidad certificada</div>
+            <p class="whyus-item-desc">Sistema de gestión de calidad ISO 9001:2015. Control dimensional 100% en piezas críticas con instrumentación calibrada.</p>
+          </div>
+        </div>
+        <div class="whyus-item">
+          <div class="whyus-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div>
+            <div class="whyus-item-title">Respuesta rápida</div>
+            <p class="whyus-item-desc">Análisis técnico y presupuesto en 24–48 horas. Gestión ágil de urgencias y series de producción continua.</p>
+          </div>
+        </div>
+        <div class="whyus-item">
+          <div class="whyus-item-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 010 1.4l-8 8a1 1 0 01-.7.3H4v-2.3a1 1 0 01.3-.7l8-8a1 1 0 011.4 0z"/><path d="M10 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-6"/></svg></div>
+          <div>
+            <div class="whyus-item-title">Solución integral</div>
+            <p class="whyus-item-desc">Desde el diseño CAD hasta el ensamblaje final. Un único interlocutor técnico para todo el ciclo de vida del producto.</p>
+          </div>
+        </div>
+        <div class="whyus-item">
+          <div class="whyus-item-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div>
+            <div class="whyus-item-title">Equipo especializado</div>
+            <p class="whyus-item-desc">Ingenieros y técnicos con más de 15 años de experiencia en sectores de alta exigencia como automoción y aeronáutica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section class="sectors" id="sectores">
+    <div class="section-tag reveal">Sectores</div>
+    <h2 class="section-title reveal d1">INDUSTRIAS<br><em>donde operamos</em></h2>
+    <div class="sectors-grid">
+      <div class="sector-card reveal">
+        <div class="sector-number">01</div>
+        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="sector-name">Automoción</div>
+        <div class="sector-sub">Componentes estructurales y sistemas de precisión</div>
+      </div>
+      <div class="sector-card reveal d1">
+        <div class="sector-number">02</div>
+        <div class="sector-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg></div>
+        <div class="sector-name">Aeronáutica</div>
+        <div class="sector-sub">Piezas de alta precisión con certificación</div>
+      </div>
+      <div class="sector-card reveal d2">
+        <div class="sector-number">03</div>
+        <div class="sector-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 014 0v2M12 12v4M10 14h4"/></svg></div>
+        <div class="sector-name">Farmacéutico</div>
+        <div class="sector-sub">Equipos de proceso y útiles de producción</div>
+      </div>
+      <div class="sector-card reveal">
+        <div class="sector-number">04</div>
+        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="sector-name">Ferroviario</div>
+        <div class="sector-sub">Sistemas de seguridad y componentes críticos</div>
+      </div>
+      <div class="sector-card reveal d1">
+        <div class="sector-number">05</div>
+        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="sector-name">Diseño de Producto</div>
+        <div class="sector-sub">Prototipos y series cortas a medida</div>
+      </div>
+      <div class="sector-card reveal d2">
+        <div class="sector-number">06</div>
+        <div class="sector-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="sector-name">Agroalimentario</div>
+        <div class="sector-sub">Maquinaria de proceso e industria alimentaria</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="proceso">
+    <div class="section-tag reveal">Cómo trabajamos</div>
+    <h2 class="section-title reveal d1">PROCESO DE<br><em>trabajo</em></h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num-wrap"><div class="step-num">01</div><div class="step-line"></div></div>
+        <div class="step-title">Consulta técnica</div>
+        <p class="step-desc">Recibimos planos o requisitos. En 24–48h nuestro equipo analiza la viabilidad y envía una respuesta técnica detallada.</p>
+        <div class="step-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="process-step reveal d1">
+        <div class="step-num-wrap"><div class="step-num">02</div><div class="step-line"></div></div>
+        <div class="step-title">Ingeniería y diseño</div>
+        <p class="step-desc">Optimizamos el diseño para fabricabilidad, reducción de costes y máxima funcionalidad con nuestros ingenieros.</p>
+        <div class="step-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="process-step reveal d2">
+        <div class="step-num-wrap"><div class="step-num">03</div><div class="step-line"></div></div>
+        <div class="step-title">Fabricación CNC</div>
+        <p class="step-desc">Producción con maquinaria CNC de 3, 4 y 5 ejes. Control de calidad en proceso y verificación dimensional 100%.</p>
+        <div class="step-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="process-step reveal d3">
+        <div class="step-num-wrap"><div class="step-num">04</div></div>
+        <div class="step-title">Entrega y soporte</div>
+        <p class="step-desc">Entrega con documentación técnica completa y certificados de calidad. Soporte post-entrega y gestión de series.</p>
+        <div class="step-arrow"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box reveal">
+      <div class="stat-n"><span class="count" data-target="15">0</span><sup>+</sup></div>
+      <div class="stat-l">Años de experiencia</div>
+    </div>
+    <div class="stat-box reveal d1">
+      <div class="stat-n"><span class="count" data-target="500">0</span><sup>+</sup></div>
+      <div class="stat-l">Proyectos completados</div>
+    </div>
+    <div class="stat-box reveal d2">
+      <div class="stat-n"><span class="count" data-target="6">0</span></div>
+      <div class="stat-l">Sectores industriales</div>
+    </div>
+    <div class="stat-box reveal d3">
+      <div class="stat-n">±0.01</div>
+      <div class="stat-l">mm de tolerancia</div>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust">
+    <div class="trust-inner">
+      <div class="trust-label">Confianza en</div>
+      <div class="trust-line"></div>
+      <div class="trust-items">
+        <div class="trust-item">Automoción</div>
+        <div class="trust-item">Aeronáutica</div>
+        <div class="trust-item">Farmacia</div>
+        <div class="trust-item">Ferroviario</div>
+        <div class="trust-item">Agroalimentario</div>
+        <div class="trust-item">Diseño Producto</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contacto">
+    <div class="section-tag reveal">¿Tienes un proyecto?</div>
+    <h2 class="cta-title reveal d1">
+      CUÉNTANOS TU<br>
+      <span class="italic-line">reto técnico</span>
+    </h2>
+    <p class="cta-sub reveal d2">
+      Nuestro equipo de ingeniería te responde en menos de 24 horas
+      con una propuesta personalizada y sin compromiso.
+    </p>
+    <div class="cta-btns reveal d3">
+      <a href="mailto:oficinatecnica@mecanizadosupc.com" class="btn-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Enviar consulta técnica
+      </a>
+      <a href="tel:+34938636976" class="cta-phone">ó llámanos al +34 938 636 976</a>
+    </div>
+    <div class="cta-contacts reveal d4">
+      <a href="mailto:oficinatecnica@mecanizadosupc.com" class="contact-chip">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        oficinatecnica@mecanizadosupc.com
+      </a>
+      <a href="tel:+34938636976" class="contact-chip">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 2 2 0 012 .98h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +34 938 636 976
+      </a>
+      <div class="contact-chip">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Carrer Alt, 9 · 08191 Rubí, Barcelona
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="foot-logo">Mecanizados<span>UPC</span></div>
+        <p class="foot-desc">Soluciones integrales de mecanizado, maquinaria especial e ingeniería industrial. Precisión y calidad desde 2010 en Rubí, Barcelona.</p>
+        <div class="foot-contact">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Carrer Alt, 9 — 08191 Rubí, Barcelona
+        </div>
+        <div class="foot-contact">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 2 2 0 012 .98h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +34 938 636 976
+        </div>
+        <div class="foot-contact">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          oficinatecnica@mecanizadosupc.com
+        </div>
+      </div>
+      <div>
+        <div class="foot-col-title">Servicios</div>
+        <ul class="foot-links">
+          <li><a href="#">Mecanizado CNC</a></li>
+          <li><a href="#">Maquinaria Especial</a></li>
+          <li><a href="#">Ingeniería</a></li>
+          <li><a href="#">Estructuras Metálicas</a></li>
+          <li><a href="#">Tornería</a></li>
+          <li><a href="#">Fresado</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-col-title">Sectores</div>
+        <ul class="foot-links">
+          <li><a href="#">Automoción</a></li>
+          <li><a href="#">Aeronáutica</a></li>
+          <li><a href="#">Farmacéutico</a></li>
+          <li><a href="#">Ferroviario</a></li>
+          <li><a href="#">Diseño de Producto</a></li>
+          <li><a href="#">Agroalimentario</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-col-title">Empresa</div>
+        <ul class="foot-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Blog técnico</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+          <li><a href="#">Aviso legal</a></li>
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="foot-copy">© 2025 Mecanizados UPC S.L. — Todos los derechos reservados</div>
+      <div class="foot-badges">
+        <div class="foot-badge">ISO 9001</div>
+        <div class="foot-badge">CNC 5 Ejes</div>
+        <div class="foot-badge">Barcelona</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Count-up
+    function countUp(el, target, dur = 1600) {
+      let s = null;
+      (function step(ts) {
+        if (!s) s = ts;
+        const p = Math.min((ts - s) / dur, 1);
+        el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = target;
+      })(performance.now());
+    }
+    const cio = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          countUp(e.target, +e.target.dataset.target);
+          cio.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.count').forEach(el => cio.observe(el));
+
+    // ── CURSOR PERSONALIZADO ──
+    const cursorDot  = document.createElement('div');
+    const cursorRing = document.createElement('div');
+    cursorDot.id  = 'cur-dot';
+    cursorRing.id = 'cur-ring';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorRing);
+
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    let hovering = false;
+
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    // Detectar hover sobre elementos interactivos
+    document.querySelectorAll('a, button, .service-card, .sector-card, .whyus-item, .process-step').forEach(el => {
+      el.addEventListener('mouseenter', () => hovering = true);
+      el.addEventListener('mouseleave', () => hovering = false);
+    });
+
+    (function animCursor() {
+      // Dot sigue el cursor al instante
+      cursorDot.style.left = mx + 'px';
+      cursorDot.style.top  = my + 'px';
+      // Ring sigue con inercia suave
+      rx += (mx - rx) * 0.1;
+      ry += (my - ry) * 0.1;
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top  = ry + 'px';
+      // Escalar en hover
+      if (hovering) {
+        cursorRing.style.width  = '52px';
+        cursorRing.style.height = '52px';
+        cursorRing.style.borderColor = 'var(--blue)';
+        cursorRing.style.background  = 'rgba(2,105,216,0.06)';
+        cursorDot.style.transform = 'translate(-50%,-50%) scale(2)';
+      } else {
+        cursorRing.style.width  = '32px';
+        cursorRing.style.height = '32px';
+        cursorRing.style.borderColor = 'rgba(2,105,216,0.5)';
+        cursorRing.style.background  = 'transparent';
+        cursorDot.style.transform = 'translate(-50%,-50%) scale(1)';
+      }
+      requestAnimationFrame(animCursor);
+    })();
+
+    // Ocultar cursor nativo solo en desktop
+    if (window.innerWidth > 768) document.body.style.cursor = 'none';
+
+    // ── EFECTO MAGNÉTICO EN BOTONES ──
+    document.querySelectorAll('.btn-blue, .btn-white, .btn-outline, .nav-cta').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width  / 2);
+        const dy = e.clientY - (r.top  + r.height / 2);
+        btn.style.transform = `translate(${dx * 0.18}px, ${dy * 0.25}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+        btn.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+        setTimeout(() => btn.style.transition = '', 400);
+      });
+    });
+
+    // ── EFECTO SPOTLIGHT EN TARJETAS ──
+    document.querySelectorAll('.service-card, .sector-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width)  * 100;
+        const y = ((e.clientY - r.top)  / r.height) * 100;
+        card.style.background = `radial-gradient(circle at ${x}% ${y}%, var(--blue-pale) 0%, var(--bg) 70%)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.background = '';
+      });
+    });
+
+    // ── EFECTO TILT EN HERO VISUAL ──
+    const heroRight = document.querySelector('.hero-right');
+    if (heroRight) {
+      heroRight.addEventListener('mousemove', e => {
+        const r = heroRight.getBoundingClientRect();
+        const dx = (e.clientX - r.left) / r.width  - 0.5;
+        const dy = (e.clientY - r.top)  / r.height - 0.5;
+        heroRight.querySelector('.hero-right-grid').style.transform =
+          `translate(${dx * 12}px, ${dy * 12}px)`;
+        heroRight.querySelector('.geo-circle').style.transform =
+          `rotate(${dx * 20}deg) translateY(${dy * 8}px)`;
+      });
+      heroRight.addEventListener('mouseleave', () => {
+        heroRight.querySelector('.hero-right-grid').style.transform = '';
+        heroRight.querySelector('.geo-circle').style.transform = '';
+      });
+    }
+
+    // ── RIPPLE EN BOTÓN PRINCIPAL ──
+    document.querySelectorAll('.btn-blue, .btn-white').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const r = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.style.cssText = `
+          position:absolute; border-radius:50%; pointer-events:none;
+          background:rgba(255,255,255,0.35);
+          width:6px; height:6px;
+          left:${e.clientX - r.left - 3}px; top:${e.clientY - r.top - 3}px;
+          transform:scale(0); animation:rippleAnim 0.55s ease-out forwards;
+        `;
+        btn.style.position = 'relative'; btn.style.overflow = 'hidden';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  </script>
+
+  <!-- Cursor + ripple styles -->
+  <style>
+    #cur-dot {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--blue); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s;
+    }
+    #cur-ring {
+      position: fixed; width: 32px; height: 32px;
+      border: 1.5px solid rgba(2,105,216,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(40); opacity: 0; }
+    }
+    @media (max-width: 768px) {
+      #cur-dot, #cur-ring { display: none; }
+    }
+  </style>
+</body>
+</html>
